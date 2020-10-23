@@ -399,4 +399,71 @@ extern "C"
 
 		return result;
 	}
+
+	RM_DLL_API float RM_SubtractAFromBDisplacement(int handleA, int handleB)
+	{
+		if (odrManager == 0 || handleA >= position.size() || handleB >= position.size())
+		{
+			return -1;
+		}
+
+		PositionDiff diff;
+		bool result = position[handleA].Delta(position[handleB], diff);
+		if (result == true)
+		{
+			float output = (float)diff.ds;
+			return output;
+		}
+		else
+		{
+			return -1;
+		}
+
+		
+	}
+
+	RM_DLL_API float RM_SubtractAFromBOffset(int handleA, int handleB)
+	{
+		if (odrManager == 0 || handleA >= position.size() || handleB >= position.size())
+		{
+			return -1;
+		}
+
+		PositionDiff diff;
+		bool result = position[handleA].Delta(position[handleB], diff);
+		if (result == true)
+		{
+			float output = (float)diff.dt;
+			return output;
+		}
+		else
+		{
+			return -1;
+		}
+
+
+	}
+
+	RM_DLL_API int RM_SubtractAFromBDLaneId(int handleA, int handleB)
+	{
+		if (odrManager == 0 || handleA >= position.size() || handleB >= position.size())
+		{
+			return -999;
+		}
+
+		PositionDiff diff;
+		bool result = position[handleA].Delta(position[handleB], diff);
+		if (result == true)
+		{
+			int output = (int)diff.dLaneId;
+			return output;
+		}
+		else
+		{
+			return -999;
+		}
+
+
+	}
+
 }
